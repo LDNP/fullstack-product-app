@@ -1,0 +1,182 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+form.product-form {
+  margin-bottom: 30px;
+}
+
+.product-form input[type="text"],
+.product-form textarea,
+.product-form input[type="number"] {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+/* Remove number input spinners (Chrome, Safari, Edge) */
+.product-form input[type=number]::-webkit-outer-spin-button,
+.product-form input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove number input spinners (Firefox) */
+.product-form input[type=number] {
+  -moz-appearance: textfield;  
+  appearance: textfield;      
+}
+
+.product-form label {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.product-form label input {
+  margin-right: 8px;
+}
+
+.product-form button {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product-list h2 {
+  margin-top: 40px;
+}
+
+.product-card {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.product-card p {
+  margin: 5px 0;
+}
+
+.product-card button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+button.edit {
+  background-color: #28a745;
+  color: white;
+}
+
+button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.product-form {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.product-form input,
+.product-form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+button {
+  margin-right: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+}

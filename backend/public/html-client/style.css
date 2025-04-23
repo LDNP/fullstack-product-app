@@ -1,0 +1,88 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    padding: 30px;
+    color: #333;
+  }
+  
+  h1, h2 {
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  form {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    max-width: 500px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: inherit;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 60px;
+    font-family: inherit;
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    color: #888;
+    font-family: inherit;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  
+  label input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  #product-list li {
+    margin-bottom: 15px;
+    background: #fff;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    max-width: 500px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  #product-list button {
+    margin-top: 6px;
+    margin-right: 8px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
