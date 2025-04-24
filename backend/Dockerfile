@@ -15,11 +15,13 @@ ARG SECRET_KEY_BASE
 ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
-# Install bundler and project gems
-RUN gem install bundler:2.2.3
+# Install bundler that matches the lockfile version and handle bundle installation properly
+RUN gem install bundler:2.6.2
+RUN bundle config set --local force_ruby_platform true
+RUN bundle lock --update
 RUN bundle install
 
-# Precompile static assets (HTML client lives in public/html-client)
+# Precompile static assets
 RUN rails assets:precompile
 
 # Run DB migrations
