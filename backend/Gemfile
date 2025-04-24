@@ -12,8 +12,8 @@ gem "puma", ">= 5.0"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[jruby]
+# Remove the platform restriction for tzinfo-data, since it's required for all platforms
+gem "tzinfo-data"
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
@@ -36,14 +36,14 @@ gem "thruster", require: false
 gem "rack-cors"
 
 group :development, :test do
-  # Debugging utilities
-gem "debug", platforms: %i[ mri], require: "debug/prelude"
+  # Debugging utilities - no need for platform restrictions on MRI
+  gem "debug", require: "debug/prelude"
 
   # Static analysis for security vulnerabilities
-gem "brakeman", require: false
+  gem "brakeman", require: false
 
   # Omakase Ruby styling
-gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rails-omakase", require: false
 end
 
 # Added Capybara for integration testing with Minitest
@@ -51,5 +51,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
 
