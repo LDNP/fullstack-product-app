@@ -37,7 +37,7 @@ gem "rack-cors"
 
 group :development, :test do
   # Debugging utilities
-gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+gem "debug", platforms: %i[ mri], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities
 gem "brakeman", require: false
