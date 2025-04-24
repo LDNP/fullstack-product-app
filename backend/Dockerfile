@@ -21,9 +21,6 @@ RUN bundle config set --local force_ruby_platform true
 RUN bundle lock --update
 RUN bundle install
 
-# Precompile static assets
-RUN rails assets:precompile
-
 # Run DB migrations
 RUN rake db:migrate
 
