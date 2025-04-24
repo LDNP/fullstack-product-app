@@ -1,4 +1,4 @@
-FROM ruby:3.1.0
+FROM ruby:3.2.0
 
 # Install system dependencies
 RUN apt-get update -yqq && \
@@ -15,7 +15,7 @@ ARG SECRET_KEY_BASE
 ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
-# Install bundler that matches the lockfile version and handle bundle installation properly
+# Install bundler and handle bundle installation properly
 RUN gem install bundler:2.4.22
 RUN bundle config set --local force_ruby_platform true
 RUN bundle lock --update
