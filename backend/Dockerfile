@@ -21,9 +21,6 @@ RUN bundle config set --local force_ruby_platform true
 RUN bundle lock --update
 RUN bundle install
 
-# Run DB migrations
-RUN rake db:migrate
-
 # Expose API port
 EXPOSE 3000
 
