@@ -8,14 +8,25 @@ RUN apt-get update -yqq && \
 WORKDIR /usr/src/app
 
 # Copy Rails API backend files
-COPY . .
+COPY . . 
 
-# Set environment variables
+# Install nodejs dependencies for React
+WORKDIR /usr/src/app/react-client
+RUN npm install
+
+# Build React App
+RUN npm run build
+
+# Move React build files to Rails public directory
+RUN cp -r /usr/src/app/react-client/build/* /usr/src/app/public/
+
+# Set environment variables for Rails
 ARG SECRET_KEY_BASE
 ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
 # Install bundler and handle bundle installation properly
+WORKDIR /usr/src/app
 RUN gem install bundler:2.4.22
 RUN bundle config set --local force_ruby_platform true
 RUN bundle lock --update
