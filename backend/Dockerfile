@@ -1,4 +1,4 @@
-FROM ruby:3.0.0
+FROM ruby:3.1.0
 
 # Install system dependencies
 RUN apt-get update -yqq && \
