@@ -36,14 +36,20 @@ gem "thruster", require: false
 gem "rack-cors"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # Debugging utilities
+gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  # Static analysis for security vulnerabilities
+gem "brakeman", require: false
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  # Omakase Ruby styling
+gem "rubocop-rails-omakase", require: false
+end
+
+# Added Capybara for integration testing with Minitest
+group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 

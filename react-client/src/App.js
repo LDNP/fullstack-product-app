@@ -40,9 +40,9 @@ function App() {
 
     try {
       if (editingId) {
-        await axios.patch(`/products/${editingId}`, { product: productData });
+        await axios.patch(`http://localhost:3000/products/${editingId}`, { product: productData });
       } else {
-        await axios.post('/products', { product: productData });
+        await axios.post('http://localhost:3000/products', { product: productData });
       }
 
       fetchProducts();
@@ -68,7 +68,7 @@ function App() {
   // Delete product
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/products/${id}`);
+      await axios.delete(`http://localhost:3000/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error('Delete failed', err);

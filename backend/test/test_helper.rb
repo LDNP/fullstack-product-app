@@ -2,6 +2,14 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 
+# Require Capybara libraries
+require 'capybara/rails'
+require 'capybara/minitest'
+
+# Capybara Configuration
+Capybara.default_driver = :rack_test
+Capybara.javascript_driver = :selenium_chrome_headless
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

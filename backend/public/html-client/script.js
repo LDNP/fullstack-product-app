@@ -25,7 +25,7 @@ function loadProducts() {
       }
 
       filtered.forEach(product => {
-        const price = parseFloat(product.price); // ✅ Safely parse price
+        const price = parseFloat(product.price); // 
         const formattedPrice = isNaN(price) ? 'N/A' : `$${price.toFixed(2)}`;
 
         const li = document.createElement('li');
@@ -79,7 +79,7 @@ form.addEventListener('submit', (e) => {
   fetch(url, {
     method: method,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ product })
+    body: JSON.stringify({ product: product })
   })
     .then(res => {
       if (!res.ok) throw new Error('Save failed');
