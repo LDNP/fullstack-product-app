@@ -17,8 +17,8 @@ RUN npm install
 # Build React App
 RUN npm run build
 
-# Move React build files to Rails public directory
-RUN cp -r /usr/src/app/react-client/build/* /usr/src/app/public/
+# Move React build files to Rails public/react-client directory
+RUN cp -r /usr/src/app/react-client/build/* /usr/src/app/public/react-client/
 
 # Set environment variables for Rails
 ARG SECRET_KEY_BASE
