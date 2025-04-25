@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products
 
   # React app fallback route (for /react or /react/anything)
-  get 'react(/*path)', to: 'application#react_client', format: false
+  get 'react-client/*path', to: 'application#react_client', format: false
 
   # Root route
   root "products#index"
