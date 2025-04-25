@@ -16,23 +16,20 @@ jobs:
             npm install
             npm run build
       
-      # Setup remote docker
-      - setup_remote_docker
-      
+      # Docker login
+      - run:
+          name: Docker login
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
       # Build Docker image using the Dockerfile in the backend directory
       - run:
           name: Build Docker Image
-          command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME -f backend/Dockerfile .
-      
-      # Login to DockerHub
-      - run:
-          name: Login to DockerHub
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      
+          command: docker build -t lisadavis552/fullstack-product-app:latest .
+
       # Push Docker image to DockerHub
       - run:
           name: Push Docker Image
-          command: docker push $DOCKER_USERNAME/$IMAGE_NAME
+          command: docker push lisadavis552/fullstack-product-app:latest
 
   deploy:
     docker:
@@ -40,7 +37,7 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      
+
       # Deploy to EC2 using the deploy.sh script
       - run:
           name: Deploy to EC2
