@@ -1,4 +1,4 @@
-ssh -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@ec2-54-247-230-134.eu-west-1.compute.amazonaws.com <<EOF
+ssh -o StrictHostKeyChecking=no -i Rails.pem ubuntu@ec2-54-247-230-134.eu-west-1.compute.amazonaws.com <<EOF
   export DOCKER_USERNAME=${DOCKER_USERNAME}
   export IMAGE_NAME=${IMAGE_NAME}
   export CONTAINER_NAME="product-app"

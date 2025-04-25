@@ -38,40 +38,49 @@ jobs:
       - checkout
 
       - run:
+          name: Save SSH key
+          command: |
+            echo "$SSH_PRIVATE_KEY" > ssh_key.pem
+            chmod 600 ssh_key.pem
+
+      - run:
           name: Deploy to EC2
           command: |
-            ssh -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@ec2-54-247-230-134.eu-west-1.compute.amazonaws.com \<<EOF
-              export DOCKER_USERNAME=${DOCKER_USERNAME}
-              export IMAGE_NAME=${IMAGE_NAME}
+            ssh -o StrictHostKeyChecking=no -i ssh_key.pem ubuntu@ec2-54-247-230-134.eu-west-1.compute.amazonaws.com << 'EOF'
+              export DOCKER_USERNAME=lisadavis552
+              export IMAGE_NAME=fullstack-product-app
               export CONTAINER_NAME="product-app"
-              export SECRET_KEY_BASE=${SECRET_KEY_BASE}
+              export SECRET_KEY_BASE='"'"$SECRET_KEY_BASE"'"'
+
+              echo "Logging into Docker Hub..."
+              echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
               echo "Pulling the latest image from DockerHub..."
-              docker pull \$DOCKER_USERNAME/\$IMAGE_NAME
+              docker pull $DOCKER_USERNAME/$IMAGE_NAME
 
-              echo "Stopping and removing any existing containers with the name \$CONTAINER_NAME..."
-              docker stop \$CONTAINER_NAME || true
-              docker rm \$CONTAINER_NAME || true
+              echo "Stopping and removing any existing containers with the name $CONTAINER_NAME..."
+              docker stop $CONTAINER_NAME || true
+              docker rm $CONTAINER_NAME || true
 
               echo "Running database migrations..."
               docker run --rm \
-                -e SECRET_KEY_BASE=\$SECRET_KEY_BASE \
+                -e SECRET_KEY_BASE=$SECRET_KEY_BASE \
                 -e RAILS_ENV=production \
                 -e DATABASE_URL=postgres://postgres:Kipper1985@172.17.0.1:5432/backend_production \
-                \$DOCKER_USERNAME/\$IMAGE_NAME \
+                $DOCKER_USERNAME/$IMAGE_NAME \
                 rake db:migrate
 
               echo "Running the container in detached mode..."
               docker run -d -p 3000:3000 \
-                --name \$CONTAINER_NAME \
+                --name $CONTAINER_NAME \
                 -e RAILS_ENV=production \
-                -e SECRET_KEY_BASE=\$SECRET_KEY_BASE \
+                -e SECRET_KEY_BASE=$SECRET_KEY_BASE \
                 -e DATABASE_URL=postgres://postgres:Kipper1985@172.17.0.1:5432/backend_production \
-                \$DOCKER_USERNAME/\$IMAGE_NAME
+                $DOCKER_USERNAME/$IMAGE_NAME
 
               echo "Container logs:"
               docker ps -a
-              docker logs \$CONTAINER_NAME
+              docker logs $CONTAINER_NAME
             EOF
 
 workflows:
