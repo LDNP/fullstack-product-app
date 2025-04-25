@@ -1,17 +1,13 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Enable all standard CRUD routes for Products
+  # API routes
   resources :products
 
-  # Routes to serve the React app
-  get 'react', to: redirect('/react-client/index.html')
-  get 'react/*path', to: redirect('/react-client/index.html')
+  # React app fallback route (for /react or /react/anything)
+  get 'react(/*path)', to: 'application#react_client', format: false
 
-  # Defines the root path route ("/")
+  # Root route
   root "products#index"
 end
