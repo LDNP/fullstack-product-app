@@ -7,7 +7,7 @@ RUN apt-get update -yqq && \
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy the entire project
+# Copy the entire project to the container
 COPY . .
 
 # Build the React app
@@ -15,13 +15,13 @@ WORKDIR /usr/src/app/react-client
 RUN npm install
 RUN npm run build
 
-# Prepare Rails application
+# Prepare Rails app to serve the React build
 WORKDIR /usr/src/app/backend
 
-# Create react-client directory in Rails public folder
-RUN mkdir -p public/react-client/
+# Create react-client directory in Rails public folder (if it doesn't exist)
+RUN mkdir -p public/react-client
 
-# Copy React build files to Rails public directory
+# Copy React build files into the Rails public folder
 RUN cp -r /usr/src/app/react-client/build/* public/react-client/
 
 # Set environment variables for Rails
@@ -31,8 +31,10 @@ ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
 # Install bundler and handle bundle installation
 RUN gem install bundler:2.4.22
-RUN bundle config set --local force_ruby_platform true
 RUN bundle install
 
 # Expose API port
 EXPOSE 3000
+
+# Start Rails server
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
