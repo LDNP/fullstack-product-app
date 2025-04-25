@@ -4,10 +4,10 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.0.0-node
-    working_directory: ~/app
+    working_directory: ~/app  # Ensure the working directory is set correctly
     steps:
       - checkout
-      
+
       # Install dependencies and build React app
       - run:
           name: Build React App
@@ -15,21 +15,25 @@ jobs:
             cd react-client
             npm install
             npm run build
-      
-      # Docker login
-      - run:
-          name: Docker login
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      # Setup remote docker for building and pushing Docker images
+      - setup_remote_docker:
+          version: 20.10.14
 
       # Build Docker image using the Dockerfile in the backend directory
       - run:
           name: Build Docker Image
-          command: docker build -t lisadavis552/fullstack-product-app:latest .
+          command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME -f backend/Dockerfile .
+
+      # Login to DockerHub
+      - run:
+          name: Login to DockerHub
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       # Push Docker image to DockerHub
       - run:
           name: Push Docker Image
-          command: docker push lisadavis552/fullstack-product-app:latest
+          command: docker push $DOCKER_USERNAME/$IMAGE_NAME
 
   deploy:
     docker:
