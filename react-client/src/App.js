@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+// 🔧 Set your API base URL
+const API_BASE = 'http://ec2-54-247-230-134.eu-west-1.compute.amazonaws.com:3000';
+
 function App() {
-  // Form + state management
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [name, setName] = useState('');
@@ -12,22 +14,19 @@ function App() {
   const [available, setAvailable] = useState(true);
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
-  // Load products from backend
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/products');
+      const res = await axios.get(`${API_BASE}/products`);
       setProducts(res.data);
     } catch (err) {
       console.error('Fetch failed', err);
     }
   };
 
-  // Initial fetch
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // Save or update product
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,9 +39,9 @@ function App() {
 
     try {
       if (editingId) {
-        await axios.patch(`http://localhost:3000/products/${editingId}`, { product: productData });
+        await axios.patch(`${API_BASE}/products/${editingId}`, { product: productData });
       } else {
-        await axios.post('http://localhost:3000/products', { product: productData });
+        await axios.post(`${API_BASE}/products`, { product: productData });
       }
 
       fetchProducts();
@@ -56,7 +55,6 @@ function App() {
     }
   };
 
-  // Fill form for edit
   const handleEdit = (product) => {
     setEditingId(product.id);
     setName(product.name);
@@ -65,17 +63,15 @@ function App() {
     setAvailable(product.available);
   };
 
-  // Delete product
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/products/${id}`);
+      await axios.delete(`${API_BASE}/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error('Delete failed', err);
     }
   };
 
-  // Filter list
   const filteredProducts = showAvailableOnly
     ? products.filter((p) => p.available)
     : products;
