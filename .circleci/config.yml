@@ -7,14 +7,14 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-
+      
       # Setup Node.js for building React app
       - run:
           name: Install Node.js and NPM
           command: |
             curl -sL https://deb.nodesource.com/setup_14.x | bash -
             sudo apt-get install -y nodejs
-
+      
       # Install dependencies and build React app
       - run:
           name: Build React App
@@ -22,21 +22,20 @@ jobs:
             cd react-client
             npm install
             npm run build
-
-      # Setup remote docker for building and pushing Docker images
-      - setup_remote_docker:
-          version: 20.10.14
-
+      
+      # Setup remote docker without specifying version
+      - setup_remote_docker
+      
       # Build Docker image
       - run:
           name: Build Docker Image
           command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME .
-
+      
       # Login to DockerHub
       - run:
           name: Login to DockerHub
           command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
+      
       # Push Docker image to DockerHub
       - run:
           name: Push Docker Image
@@ -48,7 +47,7 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-
+      
       # Deploy to EC2 using the deploy.sh script
       - run:
           name: Deploy to EC2
