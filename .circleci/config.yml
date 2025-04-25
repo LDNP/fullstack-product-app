@@ -1,9 +1,9 @@
-yamlversion: 2.1
+version: 2.1
 
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.0-node  # This image already has Node.js installed
+      - image: cimg/ruby:3.0.0-node
     working_directory: ~/app
     steps:
       - checkout
@@ -19,10 +19,10 @@ jobs:
       # Setup remote docker
       - setup_remote_docker
       
-      # Build Docker image
+      # Build Docker image using the Dockerfile in the backend directory
       - run:
           name: Build Docker Image
-          command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME .
+          command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME -f backend/Dockerfile .
       
       # Login to DockerHub
       - run:

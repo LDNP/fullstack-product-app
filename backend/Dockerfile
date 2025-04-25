@@ -7,7 +7,7 @@ RUN apt-get update -yqq && \
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy the entire project so we can build the React app
+# Copy the entire project
 COPY . .
 
 # Build the React app
@@ -15,11 +15,13 @@ WORKDIR /usr/src/app/react-client
 RUN npm install
 RUN npm run build
 
-# Create directory for React files
+# Prepare Rails application
 WORKDIR /usr/src/app/backend
+
+# Create react-client directory in Rails public folder
 RUN mkdir -p public/react-client/
 
-# Copy the React build files to the Rails public directory
+# Copy React build files to Rails public directory
 RUN cp -r /usr/src/app/react-client/build/* public/react-client/
 
 # Set environment variables for Rails
@@ -34,6 +36,3 @@ RUN bundle install
 
 # Expose API port
 EXPOSE 3000
-
-# Start Rails API server
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
