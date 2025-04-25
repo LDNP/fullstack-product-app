@@ -13,6 +13,8 @@ COPY . .
 # Build the React app
 WORKDIR /usr/src/app/react-client
 RUN npm install
+#ensure the correct homepage is set
+RUN echo '{"homepage": "/react-client"}' > .env
 RUN npm run build
 
 # Prepare Rails app to serve the React build

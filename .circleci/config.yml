@@ -13,6 +13,7 @@ jobs:
           command: |
             cd react-client
             npm install
+            echo '{"homepage": "/react-client"}' > .env
             npm run build
 
       - setup_remote_docker:
