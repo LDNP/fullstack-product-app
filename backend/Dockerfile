@@ -4,21 +4,24 @@ FROM ruby:3.2.0
 RUN apt-get update -yqq && \
     apt-get install -yqq --no-install-recommends nodejs postgresql-client
 
-# Set working directory
+# Set working directory for the Rails app
 WORKDIR /usr/src/app
 
-# Copy Rails API backend files
-COPY . . 
+# Copy the Rails backend files
+COPY backend/ .
 
-# Install nodejs dependencies for React
-WORKDIR /usr/src/app/react-client
+# Create directory for React files
+RUN mkdir -p public/react-client/
+
+# Copy and build the React app
+COPY react-client/ /tmp/react-client/
+WORKDIR /tmp/react-client
 RUN npm install
-
-# Build React App
 RUN npm run build
+RUN cp -r build/* /usr/src/app/public/react-client/
 
-# Move React build files to Rails public/react-client directory
-RUN cp -r /usr/src/app/react-client/build/* /usr/src/app/public/react-client/
+# Back to Rails directory
+WORKDIR /usr/src/app
 
 # Set environment variables for Rails
 ARG SECRET_KEY_BASE
@@ -26,7 +29,6 @@ ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
 # Install bundler and handle bundle installation properly
-WORKDIR /usr/src/app
 RUN gem install bundler:2.4.22
 RUN bundle config set --local force_ruby_platform true
 RUN bundle lock --update
