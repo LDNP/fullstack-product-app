@@ -20,7 +20,7 @@ jobs:
 
       - run:
           name: Build Docker Image
-          command: docker build -t $DOCKER_USERNAME/$IMAGE_NAME -f backend/Dockerfile .
+          command: docker build -t lisadavis552/fullstack-product-app -f backend/Dockerfile .
 
       - run:
           name: Login to DockerHub
@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: Push Docker Image
-          command: docker push $DOCKER_USERNAME/$IMAGE_NAME
+          command: docker push lisadavis552/fullstack-product-app
 
   deploy:
     docker:
