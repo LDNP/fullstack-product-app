@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   # Enable all standard CRUD routes for Products
   resources :products
 
+   # Route to serve the React frontend
+   get 'react', to: redirect('/react-client/index.html')
+   get 'react/*path', to: redirect('/react-client/index.html')
+
   # Defines the root path route ("/")
   root "products#index"
 end
