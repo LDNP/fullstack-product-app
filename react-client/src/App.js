@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-// 🔧 Set your API base URL
-const API_BASE = '';
+
+const API_BASE = 'http://ec2-54-247-230-134.eu-west-1.compute.amazonaws.com:3000'; 
 
 function App() {
   const [products, setProducts] = useState([]);
