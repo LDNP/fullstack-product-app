@@ -7,17 +7,6 @@ html, body {
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom right, #f8f9fa, #e0e0e0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .container {
@@ -43,9 +32,7 @@ form {
   margin-bottom: 30px;
 }
 
-input[type="text"],
-input[type="number"],
-textarea {
+input[type="text"], input[type="number"], textarea {
   width: 100%;
   padding: 10px;
   margin: 8px 0 12px;
@@ -61,8 +48,7 @@ textarea {
   height: 60px;
 }
 
-input::placeholder,
-textarea::placeholder {
+input::placeholder, textarea::placeholder {
   color: #888;
 }
 
