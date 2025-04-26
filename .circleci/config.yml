@@ -9,19 +9,16 @@ jobs:
       - checkout
 
       - run:
-          name: Build React App
+          name: Build React App (optional now)
           command: |
-            cd react-client
-            npm install
-            echo '{"homepage": "/react-client"}' > .env
-            npm run build
+             echo "No need to manually build React here, handled inside Dockerfile."
 
       - setup_remote_docker:
           docker_layer_caching: true
 
       - run:
           name: Build Docker Image
-          command: docker build -t lisadavis552/fullstack-product-app -f backend/Dockerfile .
+          command: docker build --no-cache -t lisadavis552/fullstack-product-app -f backend/Dockerfile .
 
       - run:
           name: Login to DockerHub
