@@ -45,9 +45,6 @@ Dockerfile*
 # Ignore Node.js dependencies (React frontend)
 node_modules/
 
-# Ignore the React build files
-react-client/build/
-
 # Ignore editor and IDE specific files (e.g., VS Code, JetBrains)
 .vscode/
 .idea/
