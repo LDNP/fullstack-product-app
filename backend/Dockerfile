@@ -1,4 +1,4 @@
-# Use Ruby as the base image
+# Start from ruby base
 FROM ruby:3.2.0
 
 # Install system dependencies
@@ -7,24 +7,24 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs n
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy the entire project to the container
+# Copy the full project
 COPY . .
 
-# Build the React frontend
+# Build React frontend
 WORKDIR /usr/src/app/react-client
 RUN npm install
 RUN npm run build
 
-# Copy React build output into Rails public folder
+# Copy the React build output into Rails public/react-client
 WORKDIR /usr/src/app/backend
 RUN mkdir -p public/react-client
 RUN cp -r /usr/src/app/react-client/build/* public/react-client/
 
-# Install Rails app dependencies
+# Install Rails backend
 RUN gem install bundler:2.4.22
 RUN bundle install
 
-# Expose Rails server port
+# Expose the API port
 EXPOSE 3000
 
 # Start Rails server
