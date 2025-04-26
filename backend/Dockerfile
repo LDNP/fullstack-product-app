@@ -7,7 +7,7 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends nodejs n
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy the full project to the folder
+# Copy the full project
 COPY . .
 
 # Build React frontend correctly
