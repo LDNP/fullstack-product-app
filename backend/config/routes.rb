@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   get '/logo512.png', to: 'static_files#serve_static'
   get '/manifest.json', to: 'static_files#serve_static'
   
-  # React app fallback route
-  get 'react-client', to: 'application#react_client', format: false
-  get 'react-client/*path', to: 'application#react_client', format: false
-  
+  # React app fallback route (fix)
+  get '/react-client(/*path)', to: redirect('/react-client/index.html')
+
   # Root route
   root "products#index"
 end
