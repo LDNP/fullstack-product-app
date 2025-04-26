@@ -17,7 +17,7 @@ Rails.application.configure do
 
   config.public_file_server.enabled = true
 
-   config.assets.prefix = '/react-client'
+  #config.assets.prefix = '/react-client'
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -80,6 +80,6 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Ensure that Rails can serve the React app's assets in production.
-  config.assets.compile = true
-  config.assets.digest = true
+  #config.assets.compile = true
+  #config.assets.digest = true
 end
