@@ -6,11 +6,11 @@
   <title>Product Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="wrapper">
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+  <div class="wrapper" style="width: 100%; display: flex; justify-content: center; align-items: center;">
     <div class="container">
       <h1>Product Manager</h1>
-
+      
       <form id="product-form">
         <input type="hidden" id="product-id" />
         <input type="text" id="name" placeholder="Name" required />
@@ -22,7 +22,7 @@
         </label>
         <button type="submit">Save Product</button>
       </form>
-
+      
       <h2>Product List</h2>
       <div>
         <label>
@@ -33,7 +33,7 @@
       <ul id="product-list"></ul>
     </div>
   </div>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
