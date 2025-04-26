@@ -13,6 +13,7 @@ COPY . .
 # Build React frontend
 WORKDIR /usr/src/app/react-client
 RUN npm install
+ENV PUBLIC_URL=/react-client
 RUN npm run build
 
 # Copy the React build output into Rails public/react-client
