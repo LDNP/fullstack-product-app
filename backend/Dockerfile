@@ -10,12 +10,15 @@ WORKDIR /usr/src/app
 # Copy the full project
 COPY . .
 
-# Build React frontend
+# Build React frontend correctly
 WORKDIR /usr/src/app/react-client
 RUN npm install
-RUN PUBLIC_URL=/react-client npm run build
 
-# Copy the React build output into Rails public/react-client
+# THIS is the critical part:
+ENV PUBLIC_URL=/react-client
+RUN npm run build
+
+# Move the React build output into Rails public/react-client
 WORKDIR /usr/src/app/backend
 RUN mkdir -p public/react-client
 RUN cp -r /usr/src/app/react-client/build/* public/react-client/
