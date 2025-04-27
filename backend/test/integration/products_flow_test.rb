@@ -63,7 +63,7 @@ class ProductsFlowTest < ActionDispatch::IntegrationTest
     
     visit "/html-client/index.html"
     
-    # Just verify basic form existence with shorter timeout
+    # verify basic form existence with shorter timeout
     assert page.has_css?("h1", text: "Product Manager", wait: 5)
     assert page.has_css?("form#product-form", wait: 5)
     assert page.has_field?("name", wait: 5)
@@ -135,10 +135,10 @@ class ProductsFlowTest < ActionDispatch::IntegrationTest
       if found_by_text || found_in_list
         assert true, "Product was found after creation"
       else
-        # Try an alternative approach - just check if there are products
+        # an alternative approach - just check if there are products
         assert page.has_css?("ul li"), "There should be at least some products in the list"
         
-        # This will still fail the test but with a more meaningful message
+        # a more meaningful message when tests fail
         skip("Product was created but could not be found in the list. API issue likely.")
       end
     ensure
